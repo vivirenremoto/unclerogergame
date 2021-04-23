@@ -23,7 +23,7 @@
 
 
     <link rel="prefetch" href="static/mp3/music.mp3" />
-    <link rel="prefetch" href="static/mp3/byebye.mp3" />
+    <link rel="prefetch" href="static/mp3/byebye2.mp3" />
     <link rel="prefetch" href="static/mp3/fuckup.mp3" />
     <link rel="prefetch" href="static/mp3/haya.mp3" />
     <link rel="prefetch" href="static/mp3/messup.mp3" />
@@ -33,7 +33,7 @@
     <link rel="prefetch" href="static/bg.jpg" />
     <link rel="prefetch" href="static/rice.png" />
     <link rel="prefetch" href="static/jamie_face2.png" />
-    <link rel="prefetch" href="static/jamie_hands.png" />
+    <link rel="prefetch" href="static/jamie_hands2.png" />
     <link rel="prefetch" href="static/roger.png" />
     <link rel="prefetch" href="static/roger3.png" />
 
@@ -198,6 +198,13 @@
 
 
 
+        .roger{background:url('static/roger.png');width:183px;height:250px;position:fixed;bottom:0;top:50%;margin-top:-125px;left:50%;margin-left:-91px;}
+        .rice{background-size:contain;z-index:1;display:none;background:url('static/rice.png');background-size:100%;width:200px;height:144px;position:fixed;}
+        .jamie{background-size:contain;z-index:1;cursor:pointer;background:url('static/jamie_face2.png');background-size:100%;width:183px;height:250px;position:fixed;left:0;top:0;}
+        .jamie_hands{position:absolute;width:140px;margin-left: -70px;margin-top: 210px;}
+        .msg{display:none;border-radius:100px;position:fixed;z-index:1;color:white;border:5px black solid;background:red;font-size:50px;padding:50px 0;width:150px;text-align:center;cursor:pointer;}
+        
+
         @keyframes shake {
             0% {
                 transform: translate(20px, 20px) rotate(0deg);
@@ -328,6 +335,14 @@
             }
 
 
+            .roger{background-size:contain;width:133px;height:180px;margin-top:-90px;margin-left:-65px;}
+            .rice{background-size:contain;width:110px;height:84px;}
+            .jamie{background-size:contain;width:133px;height:180px;}
+            .jamie_hands{position:absolute;width:90px;margin-left: -45px;margin-top: 145px;}
+            .msg{font-size:30px;padding:30px 0;width:90px;}
+            
+
+
             #leaderboard {
                 position: fixed;
                 width: 100%;
@@ -429,14 +444,12 @@
 
 
         <div id="jamie"
-            style="z-index:1;cursor:pointer;background:url('static/jamie_face2.png');background-size:100%;width:183px;height:250px;position:fixed;left:0;top:0;">
-            <img id="hands" class="shake" src="static/jamie_hands.png"
-                style="position:absolute;width:140px;margin-left: -70px;margin-top: 210px;">
+            class="jamie">
+            <img id="hands" class="jamie_hands shake" src="static/jamie_hands2.png">
         </div>
 
 
-        <div id="rice"
-            style="z-index:1;display:none;background:url('static/rice.png');background-size:100%;width:250px;height:184px;position:fixed;">
+        <div id="rice" class="rice">
         </div>
 
         <div id="bg" style="position:fixed;background:url('static/bg.jpg');position:fixed;left:0;top:0;width:100%;height:100%;background-size:cover; filter: blur(6px);"></div>
@@ -444,12 +457,13 @@
 
 
 
+
         <div id="roger"
-            style="background:url('static/roger.png');width:183px;height:250px;position:fixed;bottom:0;top:50%;margin-top:-125px;left:50%;margin-left:-91px;">
+            class="roger">
         </div>
 
 
-        <div id="msg" style="display:none;border-radius:100px;position:fixed;z-index:1;color:white;border:5px black solid;background:red;font-size:40px;padding:50px 0;width:150px;text-align:center;cursor:pointer;">MSG</div>
+        <div id="msg" class="msg">MSG</div>
 
 
     </div>
@@ -514,7 +528,7 @@
         <source src="static/mp3/fuckup.mp3" type="audio/mp3">
     </audio>
     <audio id="sound_attack2">
-        <source src="static/mp3/byebye.mp3" type="audio/mp3">
+        <source src="static/mp3/byebye2.mp3" type="audio/mp3">
     </audio>
     <audio id="sound_attack3">
         <source src="static/mp3/haya.mp3" type="audio/mp3">
@@ -522,9 +536,11 @@
     <audio id="sound_attack4">
         <source src="static/mp3/messup.mp3" type="audio/mp3">
     </audio>
+    <!--
     <audio id="sound_attack5">
         <source src="static/mp3/shit.mp3" type="audio/mp3">
     </audio>
+    -->
 
     <audio id="sound_attack_special">
         <source src="static/mp3/where_wok.mp3" type="audio/mp3">
@@ -536,7 +552,7 @@
     <script>
         var time_left = 30;
         var score = 0;
-        var best_score = 100;
+        var best_score = 50;
         var max_stars = 5;
         var timer_time;
         var timer_stars;
@@ -550,6 +566,7 @@
         var screen_height = $(document).height();
         var screen_width = $(document).width();
 
+        var is_mobile = screen_width < 500;
 
 
         var header_height;
@@ -562,6 +579,9 @@
 
         var jamie_width;
         var jamie_height;
+        
+        var rice_width;
+        var rice_height;
 
 
 
@@ -590,6 +610,9 @@
         function updateMSG(){
             var msg_left = randomNumber(0, screen_width - msg_width);
             var msg_top = randomNumber(header_height, screen_height - msg_height);
+
+
+            
             $('#msg').css('left', msg_left).css('top', msg_top);
         }
 
@@ -658,11 +681,15 @@
             roger_width = parseInt($('#roger').css('width'));
             roger_height = parseInt($('#roger').css('height'));
 
-            msg_width = parseInt($('#msg').css('width'));
-            msg_height = parseInt($('#msg').css('height'));
+            msg_width =  is_mobile ? 80 : 160;
+            msg_height = is_mobile ? 80 : 160;
 
             jamie_width = parseInt($('#jamie').css('width'));
             jamie_height = parseInt($('#jamie').css('height'));
+
+
+            rice_width = parseInt($('#rice').css('width'));
+            rice_height = parseInt($('#rice').css('height'));
 
 
 
@@ -673,6 +700,8 @@
 
 
             $('#jamie').click(function () {
+
+                if( !time_left ) return;
 
                 if( is_moving ) return;
 
@@ -695,20 +724,30 @@
 
                     rand_sound_prev = rand;
 
-                    $('#sound_attack' + rand)[0].currentTime = 0;
-                    $('#sound_attack' + rand)[0].play();
+                    $('#sound_attack_special')[0].pause();
+                    $('#sound_attack' + rand_sound_prev)[0].currentTime = 0;
+                    $('#sound_attack' + rand_sound_prev)[0].play();
                 }
 
-                var attack_speed = is_msg ? 250 : 500;
 
-                $('#rice').stop().css('left', parseInt($('#roger').css('left')) - 120).css('top', parseInt($('#roger').css('top')) + 0).show().animate({
+                var attack_speed = is_msg ? 250 : 500;
+                
+                if( is_mobile ){
+
+                    attack_speed = attack_speed;
+                }else{
+
+                }
+
+
+                $('#rice').stop().css('left', parseInt($('#roger').css('left')) -  (rice_width/2) ).css('top', parseInt($('#roger').css('top')) + 0).show().animate({
                     //left: parseInt($('#jamie').css('left')) - (jamie_width / 2),
                     //top: parseInt($('#jamie').css('top')) + (jamie_height / 2),
                     //left: $('#jamie').css('left'),
                     //top: parseInt($('#jamie').css('top')) + parseInt($('#jamie').css('height')),
                     
-                    top: parseInt($('#jamie').css('top')) + 40,
-                    left: parseInt($('#jamie').css('left')) - 40,
+                    top: parseInt($('#jamie').css('top')) + (jamie_height/2),
+                    left: parseInt($('#jamie').css('left')) ,
                     //opacity:1
                 }, attack_speed, function () {
                     $(this).hide();
@@ -746,6 +785,10 @@
 
                 $('#msg').click(function(){
                 is_msg = true;
+
+                
+                $('#sound_attack_special')[0].currentTime = 0;
+                $('#sound_attack_special')[0].play();
 
                 $('#roger').css('background-image', "url('static/roger3.png')").addClass('shake2');
 
@@ -816,6 +859,15 @@
         }
 
         function endGame() {
+
+
+            
+            for(var i=1; i<5; i++){
+                $('#sound_attack' + i)[0].pause();
+            }
+
+            $('#sound_attack_special')[0].pause();
+
 
             clearInterval(timer_msg);
             clearInterval(timer_time);
