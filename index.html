@@ -550,6 +550,7 @@
 
 
     <script>
+        var msg_hover = false;
         var time_left = 30;
         var score = 0;
         var best_score = 50;
@@ -783,32 +784,43 @@
 
 
                 $('#msg').click(function(){
-                is_msg = true;
+                    is_msg = true;
 
-                
-                $('#sound_attack_special')[0].currentTime = 0;
-                $('#sound_attack_special')[0].play();
+                    msg_hover = false;
 
-                $('#roger').css('background-image', "url('static/roger3.png')").addClass('shake2');
+                    
+                    $('#sound_attack_special')[0].currentTime = 0;
+                    $('#sound_attack_special')[0].play();
 
-                $(this).hide();
+                    $('#roger').css('background-image', "url('static/roger3.png')").addClass('shake2');
+
+                    $(this).hide();
 
 
-                $('#bg').css('opacity', 0.9);
+                    $('#bg').css('opacity', 0.9);
 
 
-                setTimeout(function(){
-                    $('#roger').css('background-image', "url('static/roger.png')").removeClass('shake2');
-                    is_msg = false;
+                    setTimeout(function(){
+                        $('#roger').css('background-image', "url('static/roger.png')").removeClass('shake2');
+                        is_msg = false;
 
-                    $('#bg').css('opacity', 1);
+                        $('#bg').css('opacity', 1);
 
-                }, 5000);
+                    }, 5000);
 
 
 
                 });
 
+
+                if( !is_mobile ){
+                    
+                    $('#msg').mouseover(function(){
+                        msg_hover = true;
+                    });
+                    
+                }
+                
 
                 timer_msg = setInterval(function(){
 
@@ -817,7 +829,9 @@
                         updateMSG();
                         
                         setTimeout(function(){
-                            $('#msg').hide();
+                            if( !msg_hover ){
+                                $('#msg').hide();
+                            }
                         }, 1000);
 
                     }
@@ -861,7 +875,7 @@
 
 
             
-            for(var i=1; i<5; i++){
+            for(var i=1; i<4; i++){
                 $('#sound_attack' + i)[0].pause();
             }
 
