@@ -2,12 +2,53 @@
 <html>
 
 <head>
-    <title></title>
+    <title>Uncle Roger Game #unclerogergame</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/vivirenremoto/confetti.js/confetti.min.js"></script>
+
+    <script src="static/jquery.animateNumbers.min.js"></script>
+
+    
+
+
+    <link rel="prefetch" href="static/mp3/music.mp3" />
+    <link rel="prefetch" href="static/mp3/byebye.mp3" />
+    <link rel="prefetch" href="static/mp3/fuckup.mp3" />
+    <link rel="prefetch" href="static/mp3/haya.mp3" />
+    <link rel="prefetch" href="static/mp3/messup.mp3" />
+    <link rel="prefetch" href="static/mp3/shit.mp3" />
+    <link rel="prefetch" href="static/mp3/where_wok.mp3" />
+
+    <link rel="prefetch" href="static/bg.jpg" />
+    <link rel="prefetch" href="static/rice.png" />
+    <link rel="prefetch" href="static/jamie_face2.png" />
+    <link rel="prefetch" href="static/jamie_hands.png" />
+    <link rel="prefetch" href="static/roger.png" />
+    <link rel="prefetch" href="static/roger3.png" />
+
+
+    <meta property="og:image" content="https://vivirenremoto.github.io/unclerogergame/static/social.png">
+    <meta property="og:image:secure_url"
+        content="https://vivirenremoto.github.io/unclerogergame/static/social.png">
+    <meta property="og:image:alt" content="Uncle Roger Game">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Uncle Roger Game">
+    <meta name="twitter:image" content="https://vivirenremoto.github.io/unclerogergame/static/social.png">
+
+
+
 
 </head>
 
@@ -15,11 +56,147 @@
 
 
     <style>
+
+        
+        * {
+            font-family: 'VT323', monospace;
+            text-transform: uppercase;
+
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Old versions of Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                            supported by Chrome, Edge, Opera and Firefox */
+        }
+
+
+        body {
+            overflow-x:hidden;
+            background: black;
+            touch-action: pan-x pan-y;
+            text-align:center;
+            color:white;
+        }
+
+
+
+        .btn_social{cursor:pointer;}
+
+        button,
+        .button {
+            text-decoration: none;
+            display: block;
+            border: 5px white solid;
+            color: white;
+            background: black;
+            padding: 5px 0;
+            margin: auto;
+            margin-bottom: 20px;
+            width: 300px;
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn_primary {
+
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+
         .shake {
             animation: shake 1s;
             animation-iteration-count: infinite;
 
         }
+
+        #intro, #result{
+            font-size: 40px;
+            background:black;
+        }
+
+
+        #game{
+            background:red;
+            position: fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+        }
+
+        #header_top{
+            background:black;
+            position: fixed;
+            top:0;
+            left:0;
+            right:0;
+            z-index: 2;
+
+        }
+
+
+        #header {
+
+            font-size: 50px;
+            color: white;
+            width: 480px;
+            margin:auto;
+        }
+
+
+        #score_bar {
+            display: inline-block;
+            width: 47%;
+            text-align: left;
+        }
+
+        #time_bar {
+            display: inline-block;
+            width: 47%;
+            text-align: right;
+        }
+
+
+
+        #table {
+            width: 480px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            border-top: 70px black solid;
+        }
+
+
+        #leaderboard {
+            position: fixed;
+            display: none;
+            text-align: center;
+            color: white;
+            width:100%;
+        }
+
+        #leaderboard td {
+            text-align: left;
+            background: black;
+
+        }
+
+
+
 
         @keyframes shake {
             0% {
@@ -66,70 +243,791 @@
                 transform: translate(1px, -2px) rotate(-20deg);
             }
         }
+
+        .shake2 {
+            animation: shake2 0.5s;
+            animation-iteration-count: infinite;
+
+        }
+
+        
+        @keyframes shake2 {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
+
+
+        
+        @media screen and (min-width: 500px) {
+            #header {
+                width: 80%;
+            }
+
+            #leaderboard table {
+                width: 480px;
+                margin: auto;
+            }
+                        
+
+        }
+
+
+
+        @media screen and (max-width: 500px) {
+
+
+            #header {
+                font-size: 50px;
+                color: white;
+                width: 100%;
+                left: 0;
+                right: 0;
+                margin-left: 0;
+            }
+
+
+            #leaderboard {
+                position: fixed;
+                width: 100%;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+
+
+            #intro,
+            #result {
+
+                left: 5%;
+            }
+
+            #intro,
+            #leaderboard {
+                width: 90%;
+                margin: auto;
+                overflow-y: scroll;
+            }
+
+
+            #leaderboard {
+                width: 100%;
+            }
+
+            #leaderboard table {
+                width: 90%;
+                margin: auto;
+            }
+
+            #btn_menu {
+                z-index: 99;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 0;
+                width: 100%;
+                margin-bottom: 0;
+            }
+
+            #leaderboard_table {
+                margin-bottom: 50px;
+            }
+
+
+
+            #result {
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+                overflow-y: scroll;
+            }
+
+        }
+
+
     </style>
 
 
-    <div id="jamie"
-        style="background:url('static/jamie_face2.png');background-size:100%;width:183px;height:250px;position:fixed;left:0;top:0;">
-        <img id="hands" class="shake" src="static/jamie_hands.png"
-            style="position:absolute;width:140px;margin-left: 15px;margin-top: 210px;">
+
+    <div id="intro">
+        <a href="https://twitter.com/vivirenremoto" target="_blank"
+            style="position:fixed;right:10px;top:0;color:white;font-size:30px;text-decoration:none;">by
+            @vivirenremoto</a>
+
+        <br>
+
+        <div style="color:yellow;font-size:52px;line-height:52px;">Uncle Roger Game</div>
+
+        <img src="static/social.png" height="200" style="margin:20px 0;">
+
+        <br>
+        <button onclick="startGame()" class="btn_primary">PLAY</button>
+        <button onclick="showLeaderboard()"><span style="font-size:20px">🏆</span> LEADERBOARD</button>
+
+
+        SHARE
+        <br>
+        <img src="static/twitter.png" class="btn_social" alt="twitter">
+        <img src="static/facebook.png" class="btn_social" alt="facebook">
+        <img src="static/whatsapp.png" class="btn_social" alt="whatsapp">
+
+
+    </div>
+
+    <div id="game" style="display:none">
+
+        <div id="header_top">
+            <div id="header">
+                <div id="score_bar">👊<span id="score">0</span></div>
+                <div id="time_bar">🕒<span id="time">0:23</span></div>
+            </div>
+        </div>
+
+
+        <div id="jamie"
+            style="z-index:1;cursor:pointer;background:url('static/jamie_face2.png');background-size:100%;width:183px;height:250px;position:fixed;left:0;top:0;">
+            <img id="hands" class="shake" src="static/jamie_hands.png"
+                style="position:absolute;width:140px;margin-left: -70px;margin-top: 210px;">
+        </div>
+
+
+        <div id="rice"
+            style="z-index:1;display:none;background:url('static/rice.png');background-size:100%;width:250px;height:184px;position:fixed;">
+        </div>
+
+        <div id="bg" style="position:fixed;background:url('static/bg.jpg');position:fixed;left:0;top:0;width:100%;height:100%;background-size:cover; filter: blur(6px);"></div>
+
+
+
+
+        <div id="roger"
+            style="background:url('static/roger.png');width:183px;height:250px;position:fixed;bottom:0;top:50%;margin-top:-125px;left:50%;margin-left:-91px;">
+        </div>
+
+
+        <div id="msg" style="display:none;border-radius:100px;position:fixed;z-index:1;color:white;border:5px black solid;background:red;font-size:40px;padding:50px 0;width:150px;text-align:center;cursor:pointer;">MSG</div>
+
+
     </div>
 
 
-    <div id="rice"
-        style="z-index:1;display:none;background:url('static/rice.png');background-size:100%;width:250px;height:184px;position:fixed;">
+    
+    <div id="result" style="display:none;">
+
+
+        <img src="static/social.png" height="200">
+
+        <br>
+
+        Chilli Jam down<br>
+        <div id="final_score" style="color:yellow;font-size:100px;line-height:90px;margin-bottom:10px;">0</div>
+
+        <div id="steam_stars" style="display:none">
+            Rating<br>
+            <div id="final_stars" style="color:yellow;font-size: 60px;line-height: 60px;margin-bottom: 20px;"> </div>
+        </div>
+        <div id="actions" style="display:none">
+            <button onclick="location.reload()">TRY AGAIN</button>
+            <button id="btn_save">SAVE SCORE</button>
+            <button onclick="showLeaderboard()"><span style="font-size:20px">🏆</span> LEADERBOARD</button>
+
+            SHARE
+            <br>
+            <img src="static/twitter.png" class="btn_social" alt="twitter">
+            <img src="static/facebook.png" class="btn_social" alt="facebook">
+            <img src="static/whatsapp.png" class="btn_social" alt="whatsapp">
+
+
+        </div>
+
+
     </div>
 
 
-    <!--
-    <div
-        style="background:url('static/jamie.gif');background-size:100%;width:400px;height:400px;position:fixed;left:0;top:0;">
-    </div>
-    -->
+    <div id="leaderboard">
+        <h2 style="font-size:40px">LEADERBOARD</h2>
+        <table id="leaderboard_table" width="100%" cellpadding="5" cellspacing="1" bgcolor="white">
+            <tr>
+                <td>Pos</td>
+                <td>Nick</td>
+                <td>Pts</td>
+            </tr>
+        </table>
+        <br>
 
-    <div id="roger"
-        style="background:url('static/roger.png');width:183px;height:250px;position:fixed;bottom:0;left:50%;margin-left:-91px;">
+        <button id="btn_menu" onclick="hideLeaderboard()" class="btn btn_primary">BACK</button>
+
+        <br><br><br>
     </div>
+
+
+    
+
+    <audio id="music" loop>
+        <source src="static/mp3/music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sound_attack1">
+        <source src="static/mp3/fuckup.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sound_attack2">
+        <source src="static/mp3/byebye.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sound_attack3">
+        <source src="static/mp3/haya.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sound_attack4">
+        <source src="static/mp3/messup.mp3" type="audio/mp3">
+    </audio>
+    <audio id="sound_attack5">
+        <source src="static/mp3/shit.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="sound_attack_special">
+        <source src="static/mp3/where_wok.mp3" type="audio/mp3">
+    </audio>
+
+
 
 
     <script>
-        var roger_width = parseInt($('#roger').css('width'));
-        var roger_height = parseInt($('#roger').css('height'));
+        var time_left = 30;
+        var score = 0;
+        var best_score = 100;
+        var max_stars = 5;
+        var timer_time;
+        var timer_stars;
+        var game_played  = false;
+
+        var rand_prev;
+        var rand_sound_prev;
+        var is_msg = false;
+
+        
+        var screen_height = $(document).height();
+        var screen_width = $(document).width();
 
 
-        var jamie_width = parseInt($('#jamie').css('width'));
-        var jamie_height = parseInt($('#jamie').css('height'));
+
+        var header_height;
+
+        var roger_width;
+        var roger_height;
+
+        var msg_width;
+        var msg_height;
+
+        var jamie_width;
+        var jamie_height;
 
 
-        $('#jamie').click(function () {
 
 
-            $('#rice').stop().css('left', parseInt($('#roger').css('left')) - 40).css('top', parseInt($('#roger').css('top')) + 40).show().animate({
-                //left: parseInt($('#jamie').css('left')) - (jamie_width / 2),
-                //top: parseInt($('#jamie').css('top')) + (jamie_height / 2),
-                //left: $('#jamie').css('left'),
-                //top: parseInt($('#jamie').css('top')) + parseInt($('#jamie').css('height')),
-                top: parseInt($('#jamie').css('top')) + 40,
-                left: parseInt($('#jamie').css('left')) - 40,
-            }, 1000, function () {
+
+        var is_moving = false;
+        var music_playing = false;
+        var music = $('#music')[0];
+        music.volume = 0.3;
+
+
+        function randomNumber(min, max) {
+            if (min > max) {
+                let temp = max;
+                max = min;
+                min = temp;
+            }
+
+            if (min <= 0) {
+                return Math.floor(Math.random() * (max + Math.abs(min) + 1)) + min;
+            } else {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+        }
+
+        function updateMSG(){
+            var msg_left = randomNumber(0, screen_width - msg_width);
+            var msg_top = randomNumber(header_height, screen_height - msg_height);
+            $('#msg').css('left', msg_left).css('top', msg_top);
+        }
+
+        function updateJamie(){
+            var rand = randomNumber(1,4);
+
+            if( rand_prev == rand ){
+                rand = randomNumber(1,4);
+            }
+            
+            rand_prev = rand;
+
+            var left = 'auto';
+            var right = 'auto';
+            var top = 'auto';
+            var bottom = 'auto';
+
+
+            if( rand == 1 ){
+                left = 0;
+                top = header_height;
+            }else if( rand == 2 ){
+                right = 0;
+                top = header_height;
+            }else if( rand == 3 ){
+                left = 0;
+                bottom = jamie_height - 170;
+            }else if( rand == 4 ){
+                right = 0;
+                bottom = jamie_height - 170;
+            }
+            $('#jamie').css('left', left).css('right', right).css('top', top).css('bottom', bottom);
+        }
+
+
+
+        function format_time(time) {
+            // Hours, minutes and seconds
+            var hrs = ~~(time / 3600);
+            var mins = ~~((time % 3600) / 60);
+            var secs = ~~time % 60;
+
+            // Output like "1:01" or "4:03:59" or "123:03:59"
+            var ret = "";
+            if (hrs > 0) {
+                ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+            }
+            ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+            ret += "" + secs;
+            return ret;
+        }
+
+
+
+        function startGame() {
+
+
+            music.play();
+            
+
+            $('#intro').hide();
+            $('#game').show();
+
+            header_height = parseInt($('#header_top').css('height'));
+
+            roger_width = parseInt($('#roger').css('width'));
+            roger_height = parseInt($('#roger').css('height'));
+
+            msg_width = parseInt($('#msg').css('width'));
+            msg_height = parseInt($('#msg').css('height'));
+
+            jamie_width = parseInt($('#jamie').css('width'));
+            jamie_height = parseInt($('#jamie').css('height'));
+
+
+
+            game_played = true;
+
+
+
+
+
+            $('#jamie').click(function () {
+
+                if( is_moving ) return;
+
+                is_moving = true;
+
+
+
+
+
+
+                if( is_msg ){
+                    $('#sound_attack_special')[0].currentTime = 0;
+                    $('#sound_attack_special')[0].play();
+                }else{
+                    var rand = randomNumber(1,4);
+
+                    if( rand_sound_prev == rand ){
+                        rand = randomNumber(1,4);
+                    }
+
+                    rand_sound_prev = rand;
+
+                    $('#sound_attack' + rand)[0].currentTime = 0;
+                    $('#sound_attack' + rand)[0].play();
+                }
+
+                var attack_speed = is_msg ? 250 : 500;
+
+                $('#rice').stop().css('left', parseInt($('#roger').css('left')) - 120).css('top', parseInt($('#roger').css('top')) + 0).show().animate({
+                    //left: parseInt($('#jamie').css('left')) - (jamie_width / 2),
+                    //top: parseInt($('#jamie').css('top')) + (jamie_height / 2),
+                    //left: $('#jamie').css('left'),
+                    //top: parseInt($('#jamie').css('top')) + parseInt($('#jamie').css('height')),
+                    
+                    top: parseInt($('#jamie').css('top')) + 40,
+                    left: parseInt($('#jamie').css('left')) - 40,
+                    //opacity:1
+                }, attack_speed, function () {
+                    $(this).hide();
+
+                    //$('#jamie').addClass('shake');
+                    //$('#hands').removeClass('shake');
+
+                    $('#jamie').hide();
+
+                    
+                    score++;
+
+                    $('#score').html(score);
+
+
+
+                    setTimeout(function () {
+                        //$('#jamie').removeClass('shake');
+                        //$('#hands').addClass('shake');
+
+                        is_moving = false;
+
+
+                        updateJamie();
+
+                        $('#jamie').show();
+
+                    }, 200);
+                });
+
+
+                });
+
+
+
+                $('#msg').click(function(){
+                is_msg = true;
+
+                $('#roger').css('background-image', "url('static/roger3.png')").addClass('shake2');
+
                 $(this).hide();
 
-                //$('#jamie').addClass('shake');
-                //$('#hands').removeClass('shake');
 
-                $('#jamie').hide();
+                $('#bg').css('opacity', 0.9);
+
+
+                setTimeout(function(){
+                    $('#roger').css('background-image', "url('static/roger.png')").removeClass('shake2');
+                    is_msg = false;
+
+                    $('#bg').css('opacity', 1);
+
+                }, 5000);
+
+
+
+                });
+
+
+                timer_msg = setInterval(function(){
+
+                    if( !is_msg ){
+                        $('#msg').show();
+                        updateMSG();
+                        
+                        setTimeout(function(){
+                            $('#msg').hide();
+                        }, 1000);
+
+                    }
+
+
+
+                }, 5000);
+
+
+
+
+                updateMSG();
+
+                updateJamie();
+
+
+
+
+            updateTime();
+
+        }
+
+        function updateTime() {
+                
+            $('#time').html(format_time(time_left));
+
+            timer_time = setInterval(function () {
+
+                time_left--;
+
+
+                if (time_left == 0) {
+                    endGame();
+                }
+
+                $('#time').html(format_time(time_left));
+            }, 1000);
+        }
+
+        function endGame() {
+
+            clearInterval(timer_msg);
+            clearInterval(timer_time);
+            time_left = 0;
+
+
+
+            setTimeout(function () {
+                $('#final_score').animateNumbers(score, false);
+
+
+
+
+
+                /*
+                setTimeout(function () {
+                    if (count_items >= record) {
+                        $('#record').html('RETO SUPERADO').css('color', '#00ff00');
+                    } else {
+                        $('#record').html('RETO FALLIDO').css('color', '#ff0000');
+                    }
+                }, 1000);
+                */
 
                 setTimeout(function () {
-                    //$('#jamie').removeClass('shake');
-                    //$('#hands').addClass('shake');
 
-                    $('#jamie').show();
 
+
+
+
+
+
+                    var stars = parseInt((score * max_stars) / best_score);
+                    if (stars > max_stars) stars = max_stars;
+
+                    var index_stars = 0;
+                    var count_stars = [];
+                    for (var i = 0; i < stars; i++) {
+                        count_stars.push('★');
+                    }
+                    for (var i = 0; i < 5 - stars; i++) {
+                        count_stars.push('✰');
+                    }
+
+                    $('#steam_stars').show();
+
+                    timer_stars = setInterval(function () {
+
+                        $('#final_stars').append(count_stars[index_stars]);
+
+                        index_stars++;
+
+                        if (index_stars > 5) {
+                            clearInterval(timer_stars);
+
+                            confetti.start();
+
+                            setTimeout(function () {
+                                confetti.stop();
+                            }, 1000);
+
+                        }
+                    }, 200);
+
+
+                    setTimeout(function () {
+
+
+                        if (score) {
+
+                            $('#btn_save').click(function () {
+
+                                $('#btn_save').hide();
+
+                                var nickname = prompt("WHATS YOUR NAME? - LEADERBOARD");
+                                if (nickname) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "https://games.vivirenremoto.com/",
+                                        dataType: "json",
+                                        data: {
+                                            action: 'add',
+                                            game: 'roger',
+                                            name: nickname,
+                                            score: score
+                                        },
+                                        success: function (data) {
+                                            alert('YOUR POSITION: ' + data.rank);
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+
+                            $('#btn_save').hide();
+                        }
+
+
+                        $('#actions').show();
+
+                    }, 200 * 5);
+
+                }, 1000);
+            }, 1000);
+
+
+
+            $('#game').hide();
+            $('#result').show();
+
+
+
+
+        }
+
+
+
+
+        function showLeaderboard() {
+
+            $('#intro').hide();
+            $('#result').hide();
+            $('#leaderboard').show();
+
+            $("#leaderboard_table").html('');
+
+
+            $.getJSON("https://games.vivirenremoto.com/?game=roger&action=rank", function (data) {
+                var items = [];
+                $.each(data, function (key, val) {
+
+                    var emoji = '';
+
+                    if (key == 0) {
+                        emoji = '🥇 ';
+                    } else if (key == 1) {
+                        emoji = '🥈 ';
+                    } else if (key == 2) {
+                        emoji = '🥉 ';
+                    } else {
+                        emoji = key + 1;
+                    }
+
+                    items.push('<tr><td width="1">' + emoji + '</td><td width="70%">' + val.name + '</td><td width="30%">' + val.score + '</td></tr>');
+                });
+
+                $("#leaderboard_table").append(items.join(""));
+
+
+                confetti.start();
+
+                setTimeout(function () {
+                    confetti.stop();
                 }, 2000);
+
             });
 
 
+
+
+
+            $('#intro').hide();
+            $('#leaderboard').show();
+
+
+            $('#leaderboard').scrollTop(0);
+        }
+
+        function hideLeaderboard() {
+
+            if (game_played) {
+                $('#result').show();
+            } else {
+                $('#intro').show();
+            }
+
+            $('#leaderboard').hide();
+        }
+
+
+
+
+        $(function () {
+            $('.btn_social').click(function () {
+                var network = $(this).attr('alt');
+                var share_url = document.location.href;
+
+
+                var share_message = document.title;
+                if (score) {
+                    share_message += ' 👊 Beat my score! 🔥' + score;
+                }
+
+
+                if (network == 'twitter') {
+                    share_url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(share_message) + '&tw_p=tweetbutton&url=' + share_url;
+
+                } else if (network == 'facebook') {
+                    share_url = 'https://www.facebook.com/sharer/sharer.php?u=' + share_url + '&quote=' + encodeURIComponent(share_message);
+
+                } if (network == 'whatsapp') {
+                    share_url = 'whatsapp://send?text=' + encodeURIComponent(share_message + ' ' + share_url);
+                }
+
+
+                window.open(share_url);
+
+            });
+
         });
+
+
 
     </script>
 
